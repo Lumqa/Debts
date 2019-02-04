@@ -54,7 +54,7 @@ namespace WebApplication
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Tasks}/{action=Index}/{id?}");
+                    template: "{controller=Tasks}/{action=List}/{id?}");
             });
             DbInitializer.Seed(app);
         }
