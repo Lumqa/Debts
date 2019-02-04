@@ -1,0 +1,44 @@
+﻿@using WebApplication.ViewModels
+@model TaskListViewModel
+
+<div>
+    <h2>@ViewBag.User</h2>
+    <h2>@ViewBag.User2</h2>
+</div>
+
+
+@foreach (var item in Model.Tasks)
+{
+    <div>
+        <h4>Member: @item.Name</h4>
+        <h4>Deposit: @item.Sum</h4>
+    </div>
+    <br />
+}
+
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Имя
+            </th>
+            <th>
+                Сумма
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tasks)
+        {
+            <tr>
+                <td>
+                    
+                        @Html.ActionLink(item.Name, "List", "Members", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sum)
+                </td>
+            </tr>
+         }
+    </tbody>
+</table>

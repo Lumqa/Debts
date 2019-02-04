@@ -1,0 +1,18 @@
+﻿@using WebApplication.ViewModels
+@model MemberListViewModel
+
+<div>
+    <h2>@ViewBag.User</h2>
+    <h2>@ViewBag.User2</h2>
+</div>
+
+
+@foreach (var item in Model.Members)
+{
+    <div>
+        <h4>Member: @item.Name</h4>
+        <h4>Deposit: @item.Deposit.ToString("c2")</h4>
+        <h4>Debt: @item.Debt.ToString("c2")</h4>
+    </div>
+    <br />
+}
