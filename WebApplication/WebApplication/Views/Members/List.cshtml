@@ -1,18 +1,50 @@
-﻿@using WebApplication.ViewModels
-@model MemberListViewModel
+﻿@model WebApplication.Models.Task
 
 <div>
-    <h2>@ViewBag.User</h2>
-    <h2>@ViewBag.User2</h2>
+    <h2>@Model.Name</h2>
+    <h2>@Model.Sum</h2>
 </div>
 
-
+@*/
 @foreach (var item in Model.Members)
 {
     <div>
-        <h4>Member: @item.Name</h4>
+        <h4>Name: @item.Name</h4>
         <h4>Deposit: @item.Deposit.ToString("c2")</h4>
         <h4>Debt: @item.Debt.ToString("c2")</h4>
     </div>
     <br />
 }
+/*@
+
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Имя
+            </th>
+            <th>
+                Депозит
+            </th>
+            <th>
+                Долг
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Members)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deposit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Debt)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

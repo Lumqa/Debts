@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,27 +13,24 @@ namespace WebApplication.Controllers
     [Authorize]
     public class MembersController : Controller
     {
-        private readonly IMemberRepository _eventRepository;
+        private readonly IMemberRepository _memberRepository;
         private readonly ITaskRepository _taskRepository;
-        private readonly UserManager<User> _userManager;
 
-        public MembersController(IMemberRepository eventRepository, UserManager<User> userManager, ITaskRepository taskRepository)
+        public MembersController(IMemberRepository eventRepository, ITaskRepository taskRepository)
         {
-            _eventRepository = eventRepository;
-            _userManager = userManager;
+            _memberRepository = eventRepository;
             _taskRepository = taskRepository;
         }
         public IActionResult List(int id)
         {
             MemberListViewModel vm = new MemberListViewModel
             {
-                Members = _eventRepository.Members.Where(s=>s.TaskId==id)
+                Members = _memberRepository.Members.Where(s => s.TaskId == id)
             };
-            ViewBag.User = _taskRepository.Tasks.First().Name;
 
-            ViewBag.User2 = _taskRepository.Tasks.First().Members.Count;
+            Task task = _taskRepository.Tasks.First(s => s.UserId == User.FindFirst(ClaimTypes.NameIdentifier).Value && s.Id == id);
 
-            return View(vm);
+            return View(task);
         }
     }
 }
