@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
         private readonly ITaskRepository _taskRepository;
